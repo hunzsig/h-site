@@ -8,8 +8,8 @@
   ],
   "license": "MIT",
   "require": {
-    "php": "^7.2",
-    "hunzsig/h-php": "dev-master",
+    "php": ">=7.2",
+    "hunzsig/h-php": "dev-master"
   },
   "repositories": {
     "packagist": {
