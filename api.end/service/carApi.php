@@ -1,0 +1,2 @@
+<?php
+function error($err = 'error') { $result = json_encode(array('code' => 403, 'response' => $err, 'data' => null)); exit($result); } $clientId = 'carApi1478418412'; $platform = 'normal'; $scope = $_POST['scope'] ?? null; $params = $_POST['params'] ?? array(); if(!$scope){ error('缺少scope'); } $sent = array( 'client_id' => $clientId, 'scope' => $scope, ); $sent = array_merge($sent, $params); $result = curlPostStream(getHost($platform), json_encode($sent)); exit($result);

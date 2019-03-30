@@ -1,0 +1,53 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "This file is @generated automatically"
+    ],
+    "content-hash": "25faf3e9aa2131fa7c90848e69cbff15",
+    "packages": [
+        {
+            "name": "hunzsig/h-php",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/hunzsig/h-php.git",
+                "reference": "3ebcfaaa742855c623d96c14cd60a9f68ea87cbd"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/hunzsig/h-php/zipball/3ebcfaaa742855c623d96c14cd60a9f68ea87cbd",
+                "reference": "3ebcfaaa742855c623d96c14cd60a9f68ea87cbd",
+                "shasum": "",
+                "mirrors": [
+                    {
+                        "url": "https://dl.laravel-china.org/%package%/%reference%.%type%",
+                        "preferred": true
+                    }
+                ]
+            },
+            "require": {
+                "php": "^7.2"
+            },
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "A http/websocket PHP framework(swoole)",
+            "time": "2019-03-19T13:55:38+00:00"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": {
+        "hunzsig/h-php": 20
+    },
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": {
+        "php": "^7.2"
+    },
+    "platform-dev": []
+}

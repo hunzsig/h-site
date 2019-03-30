@@ -1,0 +1,2 @@
+<?php
+namespace plugins\Crypto; class Aes{ var $key; var $iv; public function __construct($key, $iv = 0){ $this->key = $key; $this->iv = ($iv == 0) ? $key : $iv; } public function encrypt256CBC($str){ return openssl_encrypt($str,'aes-256-cbc',$this->key,0,$this->iv); } public function decrypt256CBC($str){ return openssl_decrypt($str,'aes-256-cbc',$this->key,0,$this->iv); } }

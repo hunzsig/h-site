@@ -1,0 +1,20 @@
+@charset "UTF-8";
+
+.normal-footer{
+  width: 100%;
+  text-align: center;
+}
+.copyright{
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 5px 0;
+  color: #999;
+  font-size: 13px;
+  span,a{
+    margin-right: 10px;
+  }
+  a{
+    color: #ffe045;
+  }
+}

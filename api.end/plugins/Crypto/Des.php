@@ -1,0 +1,2 @@
+<?php
+namespace plugins\Crypto; class Des{ var $key; var $iv; public function __construct($key, $iv = 0){ $this->key = $key; $this->iv = ($iv == 0) ? $key : $iv; } public function encryptCBC($str){ return openssl_encrypt($str,'des-cbc',$this->key,0,$this->iv); } public function decryptCBC($str){ return openssl_decrypt($str,'des-cbc',$this->key,0,$this->iv); } }
