@@ -1,2 +1,0 @@
-<?php
- namespace plugins\Alipay\WapV2\Funcs; class Rsa{ public function rsaVerify($data, $ali_public_key, $sign) { $res = "-----BEGIN PUBLIC KEY-----\n" . wordwrap($ali_public_key, 64, "\n", true) . "\n-----END PUBLIC KEY-----"; ($res) or die('支付宝RSA公钥错误。请检查公钥文件格式是否正确'); $result = (bool)openssl_verify($data, base64_decode($sign), $res); return $result; } } ?>
