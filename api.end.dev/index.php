@@ -1,6 +1,6 @@
 <?php
 define('CONFIG_PATH', __DIR__ . '/config.php');
-require __DIR__ . "/h-php/hHttp.php";
+require __DIR__ . "/vendor/hunzsig/h-php/hHttp.php";
 $hphp = new Main();
 // 访问 http://127.0.0.1:port/external/helloWorld
 $hphp->external('helloWorld', __DIR__ . '/myExternal/helloWorld.php');
