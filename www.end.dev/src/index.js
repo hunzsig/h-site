@@ -8,6 +8,8 @@ import Auth from './../h-react-library/common/Auth';
 import I18n from './../h-react-library/common/I18n';
 import hRouter from './../h-react-library/hRouter';
 
+import ExternalI18n from './i18n';
+
 const CONTAINER = document.getElementById('h-container');
 
 if (!CONTAINER) {
@@ -27,6 +29,7 @@ Api.setType('http');
 Api.setHost(httpHost);
 Auth.setLoginPath('/login');
 I18n.setDefaultLang('zh_cn');
+I18n.setExternal(ExternalI18n);
 hRouter.setRouter(Router);
 hRouter.setIsAsync(true);
 hRouter.setConfig(routerConfig);
