@@ -20,11 +20,13 @@ const levelMap = [
   {value: '10', label: '高级2级', disabled: false},
   {value: '11', label: '高级3级', disabled: false},
   {value: '12', label: '程序级', disabled: false},
-  {value: '13', label: '数学级', disabled: true},
+  {value: '13', label: '数学1级', disabled: false},
+  {value: '14', label: '数学2级', disabled: false},
+  {value: '15', label: '数学3级', disabled: false},
 ];
 const levelPower = {
-  '0': {iq: 2, qty: 50, range: [1, 10], type: ['+'], change: ['default']},
-  '1': {iq: 2, qty: 50, range: [1, 50], type: ['+'], change: ['default']},
+  '0': {iq: 2, qty: 10, range: [1, 10], type: ['+'], change: ['default']},
+  '1': {iq: 2, qty: 20, range: [1, 50], type: ['+'], change: ['default']},
   '2': {iq: 2, qty: 50, range: [1, 50], type: ['+', '-'], change: ['default']},
   '3': {iq: 3, qty: 50, range: [1, 99], type: ['+', '-'], change: ['default']},
   '4': {iq: 2, qty: 100, range: [1, 99], type: ['+', '-', '*'], change: ['default']},
@@ -35,8 +37,16 @@ const levelPower = {
   '9': {iq: 3, qty: 100, range: [-10, 299], type: ['+', '-', '*', '/'], change: ['default']},
   '10': {iq: 3, qty: 100, range: [-100, 499], type: ['+', '-', '*', '/'], change: ['default']},
   '11': {iq: 4, qty: 100, range: [-999, 999], type: ['+', '-', '*', '/'], change: ['default']},
-  '12': {iq: 2, qty: 200, range: [-100, 499], type: ['+', '-', '*', '/'], change: ['default', 'ary']},
-  '13': {iq: 3, qty: 200, range: [-999, 999], type: ['+', '-', '*', '/'], change: ['default', 'pow', 'square', 'abs', 'log2']},
+  '12': {iq: 2, qty: 100, range: [-100, 499], type: ['+', '-', '*', '/'], change: ['default', 'ary']},
+  '13': {iq: 2, qty: 100, range: [-50, 299], type: ['+', '-', '*', '/'], change: ['default', 'pow', 'abs']},
+  '14': {iq: 3, qty: 100, range: [-99, 399], type: ['+', '-', '*', '/'], change: ['default', 'pow', 'square', 'abs']},
+  '15': {
+    iq: 3,
+    qty: 100,
+    range: [-99, 499],
+    type: ['+', '-', '*', '/'],
+    change: ['default', 'pow', 'square', 'abs', 'log2']
+  },
 };
 const argsType = [
   {val: 2, label: '二'},
@@ -101,76 +111,100 @@ class CaleGym extends Component {
     const type = levelPower[this.state.level].type;
     const change = levelPower[this.state.level].change;
     for (let i = 0; i < qty; i++) {
-      const di = [];
-      const ri = [];
       const itemQty = levelPower[this.state.level].iq;
+      let isAry = false;
+      let label = '';
+      let formula = '';
       for (let j = 0; j < itemQty; j++) {
-        const t = type[Parse.randInt(0, type.length - 1)];
         let val = Parse.randInt(min, max);
-        let label = null;
-        let formula = null;
-        if (ri.length === 0) {
-          label = val;
-          formula = val;
+        // first
+        if (label === '') {
+          label = val.toString();
+          formula = val.toString();
         } else {
+          const t = type[Parse.randInt(0, type.length - 1)];
+          let valTemp = val;
           switch (t) {
             case '+':
               if (val < 0) {
-                label = '-' + Math.abs(val);
-                formula = '-' + Math.abs(val);
+                valTemp = Math.abs(valTemp);
+                label += '-';
+                formula += '-';
               } else {
-                label = '+' + val;
-                formula = '+' + val;
+                label += '+';
+                formula += '+';
               }
               break;
             case '-':
               if (val < 0) {
-                label = '+' + Math.abs(val);
-                formula = '+' + Math.abs(val);
+                valTemp = Math.abs(valTemp);
+                label += '+';
+                formula += '+';
               } else {
-                label = '-' + val;
-                formula = '-' + val;
+                label += '-';
+                formula += '-';
               }
               break;
             case '*':
-              label = '&times;' + val;
-              formula = '*' + val;
+              label += '&times;';
+              formula += '*';
               break;
             case '/':
-              if (val === 0) val = 2;
-              label = '&divide;' + val;
-              formula = '/' + val;
+              while (valTemp === 0) {
+                valTemp = Parse.randInt(min, max);
+              }
+              label += '&divide;';
+              formula += '/';
+              break;
+          }
+          let c = change[Parse.randInt(0, type.length - 1)];
+          if (val < 0 && ['square', 'log2', 'abs'].includes(c)) {
+            c = 'default';
+          }
+          switch (c) {
+            case 'ary':
+              isAry = true;
+              label += valTemp.toString();
+              formula += valTemp.toString();
+              break;
+            case 'pow':
+              const powi = Parse.randInt(2, 6);
+              label += valTemp.toString() + `<sup>${powi}</sup>`;
+              formula += `Math.pow(${valTemp.toString()}, ${powi})`;
+              break;
+            case 'square':
+              label += '&radic;' + valTemp.toString();
+              formula += `Math.sqrt(${valTemp.toString()})`;
+              break;
+            case 'abs':
+              label += valTemp.toString();
+              formula += valTemp.toString();
+              break;
+            case 'log2':
+              label += 'log<sub>2</sub>' + valTemp.toString();
+              formula += `Math.log2(${valTemp.toString()})`;
+              break;
+            case 'default':
+            default:
+              label += valTemp.toString();
+              formula += valTemp.toString();
               break;
           }
         }
-        ri.push(formula);
-        di.push({val: val, label: label});
       }
-      let riStr = ri.join('');
-      console.log(riStr);
-      let riRes = eval(riStr);
-      const c = change[Parse.randInt(0, type.length - 1)];
-      switch (c) {
-        case 'ary':
-          const a = argsType[Parse.randInt(0, argsType.length - 1)];
-          riStr = riStr + `(${a.label}进制)`;
-          riRes = riRes.toString(a.val);
-          break;
-        case 'pow':
-          break;
-        case 'square':
-          break;
-        case 'abs':
-          break;
-        case 'log2':
-        case 'default':
-        default:
-          riRes = Math.round(riRes).toString();
-          break;
+      let result = Math.round(eval(formula));
+      if (result === -0) {
+        result = 0;
       }
-      this.curResult.push({index: i, items: di, label: riStr, result: riRes});
+      if (isAry) {
+        const a = argsType[Parse.randInt(0, argsType.length - 1)];
+        label = `(${label}) -> ${a.label}进制`;
+        result = result.toString(a.val);
+      } else {
+        result = result.toString(10);
+      }
+      this.curResult.push({index: i, label: label, result: result});
     }
-    console.log(this.curResult);
     this.secondTimer = null;
     this.second = 0;
     return (
@@ -217,7 +251,7 @@ class CaleGym extends Component {
               <Row>
                 <Col span={14}>
                   <div style={{lineHeight: '32px', textAlign: 'right'}}>
-                    <span dangerouslySetInnerHTML={{__html: item.label}} />
+                    <span dangerouslySetInnerHTML={{__html: item.label}}/>
                     <span>&nbsp;=&nbsp;</span>
                   </div>
                 </Col>
