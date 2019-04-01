@@ -95,7 +95,7 @@ class CaleGym extends Component {
       }
     });
     const score = right / curResult.length * 100;
-    alert(`答完了${(this.second.toFixed(2))} 秒,分数：${score}`);
+    message.info(`答完了${(this.second.toFixed(2))} 秒,分数：${score}`);
   };
 
   renderQuestion = () => {
@@ -214,12 +214,13 @@ class CaleGym extends Component {
           <div>
             <Row>
               <Col span={20}>
-              <span>请答题，计时将会从你开始作答一瞬间开始&nbsp;
-                <Button onClick={() => {
-                  this.props.history.replace('/power/caleGym');
-                }}>
-                  重来
-                </Button>
+              <span>请答题，计时将会从你开始作答一瞬间开始&emsp;
+                <Button size="small" onClick={() => {this.props.history.replace('/power/caleGym');}}>返回</Button>&emsp;
+                <Button size="small" type="danger" onClick={() => {
+                  this.setState({level: this.state.level});
+                  window.clearInterval(this.secondTimer);
+                  document.getElementById('second').innerHTML = '等待再次做题';
+                }}>新题</Button>&emsp;
               </span>
               </Col>
               <Col span={4}>
@@ -332,7 +333,7 @@ class CaleGym extends Component {
     return (
       <div style={styles.box}>
         {this.state.isAnswerStart === false && this.renderForm()}
-        <div style={{width: 1200, margin: '0 auto'}}>
+        <div style={{width: 1000, margin: '0 auto'}}>
           {this.renderQuestion()}
         </div>
       </div>
