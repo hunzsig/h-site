@@ -25,11 +25,11 @@ const logData = [
   },
   {
     name: 'hJLua',
-    log: (<Markdown>{require("./md/hJLua.md")}</Markdown>),
+    log: (<Markdown>{require("./md/h-lua.md")}</Markdown>),
   },
   {
     name: 'hJass',
-    log: (<Markdown>{require("./md/hjass.md")}</Markdown>),
+    log: (<Markdown>{require("./md/h-vjass.md")}</Markdown>),
   },
   {
     name: '时空之轮TD',
