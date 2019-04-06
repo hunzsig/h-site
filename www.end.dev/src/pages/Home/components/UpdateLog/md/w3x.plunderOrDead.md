@@ -1,4 +1,4 @@
-## 更新日志
+## 更新日志 <a href="https://gitlab.com/h-w3x/h-war3/tree/master/w3xMaps/plunderOrDead" target="_blank">Gitlab</a>
 ### v2.0.9
     【系统】修复已知的bug
 ### v2.0.8

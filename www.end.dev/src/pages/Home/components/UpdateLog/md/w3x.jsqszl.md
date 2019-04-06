@@ -1,4 +1,4 @@
-## 更新日志
+## 更新日志 <a href="https://gitlab.com/h-w3x/h-war3/tree/master/w3xMaps/jsqszl" target="_blank">Gitlab</a>
 ### v2.20
     -春季地皮
     -暗影猎手的巫术冷却时间改为40秒

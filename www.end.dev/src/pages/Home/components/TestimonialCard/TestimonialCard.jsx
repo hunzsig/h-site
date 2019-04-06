@@ -6,16 +6,16 @@ const {Row, Col} = Grid;
 const generatorData = () => {
   return [
     {
-      name: 'hJLua',
+      name: 'h-lua',
       company: '魔兽lua制图框架',
       description: '基于lua语言，结合YDWE的Lua引擎、SLK，在hJass基础上实现二次功能强化，多样丰富的属性系统，内置多达几十种以上的自定义事件，为帮助魔兽地图极速制作而生！',
-      imgUrl: require('./images/github.png'),
+      imgUrl: require('./images/h-lua.png'),
     },
     {
-      name: 'hJass',
+      name: 'h-vjass',
       company: '魔兽vJass制图框架',
       description: '基于vJ语言。内置多达几十种自定义事件,可以轻松做出平时难以实现的功能。物品合成分拆、丰富自定义技能模板、镜头、单位组、过滤器、背景音乐、天气、特效、音效等。',
-      imgUrl: require('./images/hjass.jpg'),
+      imgUrl: require('./images/h-vjass.png'),
     },
     {
       name: '剑圣求生之路',
@@ -27,7 +27,7 @@ const generatorData = () => {
       name: 'h-php',
       company: 'PHP后端框架',
       description: '结合swoole，支持http/websocket。支持配置加密，支持数据库数据自动加密，自动式缓存。支持各种关系型数据库，结构简单，并可压缩加密打包为dll后缀文件混淆。',
-      imgUrl: require('./images/github.png'),
+      imgUrl: require('./images/gitlab.png'),
     },
     {
       name: 'h-ice-cli',
@@ -39,7 +39,7 @@ const generatorData = () => {
       name: 'h-react-library',
       company: '一个react常用库',
       description: '极其常用的react前端库。包括过滤列表、表单、图表、i18n翻译、API模块、布局、文件上传等模块。与h-php相结合，并实现全程加密，支持http/websocket，极其方便。',
-      imgUrl: require('./images/github.png'),
+      imgUrl: require('./images/gitlab.png'),
     }
   ];
 };

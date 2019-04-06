@@ -1,6 +1,4 @@
-# h-react-library <a href="https://gitlab.com/h-web/h-react-library" target="_blank">Gitlab</a>
-### h-react-library是在antd,iceDesign基础上更进一步的常用react组件库
-## 更新日志
+## 更新日志 <a href="https://gitlab.com/h-web/h-react-library" target="_blank">Gitlab</a>
 ### 2019/03/25
     修复了StaticLayout二级子菜单高亮错误的问题
 ### 2019/03/24
