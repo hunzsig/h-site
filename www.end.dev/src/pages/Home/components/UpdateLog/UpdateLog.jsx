@@ -24,11 +24,11 @@ const logData = [
     log: (<Markdown>{require("./md/h-react-library.md")}</Markdown>),
   },
   {
-    name: 'hJLua',
+    name: 'h-lua',
     log: (<Markdown>{require("./md/h-lua.md")}</Markdown>),
   },
   {
-    name: 'hJass',
+    name: 'h-vjass',
     log: (<Markdown>{require("./md/h-vjass.md")}</Markdown>),
   },
   {

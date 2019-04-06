@@ -1,4 +1,6 @@
 ## 更新日志 <a href="https://gitlab.com/h-web/h-site" target="_blank">Gitlab</a>
+### 2019/04/06
+    修改了首页各个项目的说明及日志
 ### 2019/03/25
     增加了一个运算锻炼器
 ### 2019/03/24
