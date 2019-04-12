@@ -3,6 +3,8 @@ import {Timeline} from 'antd';
 import Parse from "../../../h-react-library/common/Parse";
 import DesktopForm from "../../../h-react-library/components/DesktopForm";
 
+import './StockCale.scss';
+
 const stockMarketingMap = [
   {value: 'lu_a', label: '沪市A股'},
   {value: 'lu_b', label: '沪市B股'},

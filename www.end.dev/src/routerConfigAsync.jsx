@@ -42,11 +42,11 @@ const routerConfig = [
     icon: <Icon type="rise" />,
     children: [
       {
-        path: '/stockCale',
-        name: '股票收益计算器',
-        icon: <Icon type="stock" />,
+        path: '/sheinPoker',
+        name: 'SHEIN扑克游戏',
+        icon: <Icon type="pic-left" />,
         layout: Layout,
-        component: () => import('./pages/Power/StockCale'),
+        component: () => import('./pages/Power/SheinPoker'),
       },
       {
         path: '/caleGym',
@@ -54,6 +54,13 @@ const routerConfig = [
         icon: <Icon type="calculator" />,
         layout: Layout,
         component: () => import('./pages/Power/CaleGym'),
+      },
+      {
+        path: '/stockCale',
+        name: '股票收益计算器',
+        icon: <Icon type="stock" />,
+        layout: Layout,
+        component: () => import('./pages/Power/StockCale'),
       },
     ],
   },

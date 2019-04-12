@@ -1,4 +1,6 @@
 ## 更新日志 <a href="https://gitlab.com/h-web/h-react-library" target="_blank">Gitlab</a>
+### 2019/04/12
+    新增 Parse 函数数组洗牌 shuffle
 ### 2019/03/25
     修复了StaticLayout二级子菜单高亮错误的问题
 ### 2019/03/24
