@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {withRouter} from 'react-router-dom';
-import {message, Statistic, Button, Row, Col, Alert} from 'antd';
+import {Table, Statistic, Button, Row, Col, Alert} from 'antd';
 import Parse from '../../../h-react-library/common/Parse';
 
 import './SheinPoker.scss';
@@ -199,6 +199,42 @@ class SheinPoker extends Component {
     }, 0.75)
   };
 
+  renderTable = () => {
+    const columns = [
+      {title: '组', dataIndex: 'id', key: 'id'},
+      {title: '条件', dataIndex: 'label', key: 'label'},
+      {title: '游戏状态', dataIndex: 'status', key: 'status'},
+      {title: '完成状态', dataIndex: 'finish', key: 'finish'},
+      {title: '总跑轮数', dataIndex: 'lap', key: 'lap'},
+      {title: '记错次数', dataIndex: 'error', key: 'error'},
+      {title: '总耗时', dataIndex: 'second_total', key: 'second_total'},
+      {title: '跑步耗时', dataIndex: 'second_move', key: 'second_move'},
+      {title: '翻牌耗时', dataIndex: 'second_turn', key: 'second_turn'},
+      {title: '交流耗时', dataIndex: 'second_contact', key: 'second_contact'},
+      {title: '回忆耗时', dataIndex: 'second_recall', key: 'second_recall'},
+    ];
+    const show = [];
+    plans.forEach((v) => {
+      const data = this.state.data[v.value];
+      show.push({
+        id: v.value,
+        label: v.label,
+        status: this.state.isPlaying ? '正在游戏中...' : '不在游戏中',
+        finish: data && data.finish ? '已完成' : '-',
+        lap: data && data.lap ? data.lap + '轮' : '-',
+        error: data && data.error ? data.error + '次' : '-',
+        second_total: data && data.second ? data.second.total + '秒' : '-',
+        second_move: data && data.second ? data.second.move + '秒' : '-',
+        second_turn: data && data.second ? data.second.turn + '秒' : '-',
+        second_contact: data && data.second ? data.second.contact + '秒' : '-',
+        second_recall: data && data.second ? data.second.recall + '秒' : '-',
+      });
+    });
+    return (
+      <Table columns={columns} dataSource={show} pagination={false} />
+    );
+  };
+
   render() {
     return (
       <div style={styles.box}>
@@ -221,29 +257,7 @@ class SheinPoker extends Component {
               </div>
             }
           />
-          <Row gutter={4}>
-            {
-              plans.map((v) => {
-                const data = this.state.data[v.value];
-                return (
-                  <Col key={v.value} span={4} style={styles.block}>
-                    <Alert banner message={v.label} icon={false} type="warning"/>
-                    <div>
-                      <Statistic title="游戏状态" value={this.state.isPlaying ? '正在游戏中...' : '不在游戏中'} />
-                      <Statistic title="完成状态" value={data && data.finish ? '已完成' : '未完成'} />
-                      {data && data.lap && <Statistic title="总跑轮数" value={data.lap + '轮'} />}
-                      {data && data.second && <Statistic title="总耗时" value={data.second.total + '秒'} />}
-                      {data && data.second && <Statistic title="跑步耗时" value={data.second.move + '秒'} />}
-                      {data && data.second && <Statistic title="翻牌耗时" value={data.second.turn + '秒'} />}
-                      {data && data.second && <Statistic title="交流耗时" value={data.second.contact + '秒'} />}
-                      {data && data.second && <Statistic title="回忆耗时" value={data.second.recall + '秒'} />}
-                      {data && data.error && <Statistic title="记错次数" value={data.error + '次'} />}
-                    </div>
-                  </Col>
-                );
-              })
-            }
-          </Row>
+          {this.renderTable()}
           <div style={{textAlign: 'center', marginTop: 20}}>
             <Button
               type="primary"
