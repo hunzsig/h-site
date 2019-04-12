@@ -18,11 +18,19 @@ const plans = [
   {value: '10', label: ['半分翻牌', '延序拓展']},
 ];
 const poker = Array.from({length: 26}, (v, k) => k);
+const pokerData = {
+  run: 8,
+  scan: 0.1,
+  turn: 0.3,
+  record: 0.1,
+  contact: 0.8,
+  recall: 3,
+  error: 0.05,
+};
 
 class SheinPoker extends Component {
   constructor(props) {
     super(props);
-    this.debug = 0;
     this.state = {
       currentPoker: [],
       isPlaying: false,
@@ -62,7 +70,6 @@ class SheinPoker extends Component {
   };
 
   start = () => {
-    this.debug = 0;
     this.state.currentPoker = Parse.shuffle(poker);
     this.setState({
       currentPoker: this.state.currentPoker,
@@ -101,12 +108,10 @@ class SheinPoker extends Component {
           if (scanQty < 1) scanQty = 1;
           let thisPokerValue = this.state.currentPoker[turni]; // 正确值
           pi === 1 && console.log(turni, thisPokerValue);
-          /*
-          if (v.label.includes('可能会记错') && Math.random() < 0.05) {
+          if (v.label.includes('可能会记错') && Math.random() < pokerData.error) {
             data.error = data.error + 1;
             thisPokerValue = this.state.currentPoker[Parse.randInt(0, 25)];
           }
-          */
           if (v.label.includes('可用工具')) {
             if (typeof data.cache.total === "undefined") data.cache.total = {};
             data.cache.total[turni] = thisPokerValue;
@@ -115,9 +120,9 @@ class SheinPoker extends Component {
             data.cache[pi] = {};
           }
           data.cache[pi][turni] = thisPokerValue;
-          data.second.scan = Parse.decimal(data.second.scan + 0.2 * (scanQty - 1), 2);
-          data.second.move = Parse.decimal(data.second.move + 10, 2);
-          data.second.turn = Parse.decimal(data.second.turn + 1, 2);
+          data.second.scan = Parse.decimal(data.second.scan + pokerData.scan * (scanQty - 1), 2);
+          data.second.move = Parse.decimal(data.second.move + pokerData.run, 2);
+          data.second.turn = Parse.decimal(data.second.turn + pokerData.turn, 2);
           if (this.state.currentPoker[turni] === thisPokerValue && this.state.currentPoker[turni] === data.target) {
             data.found.push(thisPokerValue);
             data.target = data.target + 1;
@@ -126,7 +131,7 @@ class SheinPoker extends Component {
               this.state.finish = this.state.finish + 1;
             }
           } else if (v.label.includes('可用工具')) {
-            data.second.contact = data.second.contact + 2; // 全局对照只消耗一次交流
+            data.second.contact = data.second.contact + pokerData.record; // 全局对照只消耗一次交流
             for (let ti = 0; ti < this.state.currentPoker.length; ti++) {
               if (data.cache.total[ti] === this.state.currentPoker[ti] && this.state.currentPoker[ti] === data.target) {
                 data.found.push(data.target);
@@ -143,7 +148,7 @@ class SheinPoker extends Component {
               let isBreak = false;
               for (let opi = 1; opi < 14; opi++) {
                 if (opi === pi) continue;
-                data.second.contact = data.second.contact + 0.05;
+                data.second.contact = data.second.contact + pokerData.contact * 0.1;
                 if (data.cache[opi] && data.cache[opi][ti] && data.cache[opi][ti] === this.state.currentPoker[ti] && this.state.currentPoker[ti] === data.target) {
                   data.found.push(data.target);
                   data.target = data.target + 1;
@@ -151,7 +156,7 @@ class SheinPoker extends Component {
                     data.finish = true;
                     this.state.finish = this.state.finish + 1;
                   }
-                  data.second.contact = data.second.contact + 2;
+                  data.second.contact = data.second.contact + pokerData.contact;
                   isBreak = true;
                   break;
                 }
@@ -168,7 +173,7 @@ class SheinPoker extends Component {
                 data.finish = true;
                 this.state.finish = this.state.finish + 1;
               }
-              data.second.recall = data.second.recall + 15;
+              data.second.recall = data.second.recall + pokerData.recall;
               break
             }
           }
@@ -189,14 +194,12 @@ class SheinPoker extends Component {
         data: this.state.data,
         finish: this.state.finish,
       });
-      console.log(this.state);
     }
     setTimeout(() => {
-      this.debug = this.debug + 1;
-      if (this.state.isPlaying /*&& this.debug < 10*/) {
+      if (this.state.isPlaying) {
         this.run();
       }
-    }, 1.00)
+    }, 0.25)
   };
 
   renderTable = () => {
@@ -231,7 +234,7 @@ class SheinPoker extends Component {
       });
     });
     return (
-      <Table columns={columns} dataSource={show} pagination={false} />
+      <Table columns={columns} dataSource={show} pagination={false}/>
     );
   };
 
@@ -246,13 +249,13 @@ class SheinPoker extends Component {
               <div>
                 <h3>SHEIN13人每组26张扑克牌记忆游戏模拟</h3>
                 <p>1、扑克牌分为红色组与黑色组，按先红后黑的顺序依次将[A～K]26张牌翻出来</p>
-                <p>2、每人跑步模拟时间为 10 秒</p>
-                <p>3、每人翻牌模拟时间为 1 秒</p>
-                <p>4、每人找牌模拟时间为：与自身安排序号最近距离的每个单位为 0.2 秒，如安排寻找1号牌，则为 0 秒，24号牌则为 0.4秒</p>
+                <p>2、每人跑步模拟时间为 {pokerData.run} 秒</p>
+                <p>3、每人翻牌模拟时间为 {pokerData.turn} 秒</p>
+                <p>4、每人找牌模拟时间为：与自身安排序号最近距离的每个单位为 {pokerData.scan} 秒，如安排寻找1号牌，则为 0 秒，24号牌则为 {pokerData.scan * 2}秒</p>
                 <p>5、必须组内每人都参与</p>
-                <p>6、一次交流时间模拟为 2 秒，使用工具也算是一次交流</p>
-                <p>7、在允许记错牌的情况下，记错的概率为 5 %</p>
-                <p>8、每人从自己脑海中搜索记忆时间为 15 秒</p>
+                <p>6、一次交流时间模拟为 {pokerData.contact} 秒，使用工具也算是一次交流，设为 {pokerData.record} 读取速度秒</p>
+                <p>7、在允许记错牌的情况下，记错的概率为 {pokerData.error * 100} %</p>
+                <p>8、每人从自己脑海中搜索记忆时间为 {pokerData.recall} 秒</p>
                 <p>* 由于为程序模拟，删除抢跑罚10秒，删除翻错牌罚3秒</p>
               </div>
             }
