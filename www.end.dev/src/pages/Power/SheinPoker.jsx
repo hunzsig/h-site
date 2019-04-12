@@ -1,13 +1,13 @@
 import React, {Component} from 'react';
 import {withRouter} from 'react-router-dom';
-import {message, List, Button, Row, Col, Alert} from 'antd';
+import {message, Statistic, Button, Row, Col, Alert} from 'antd';
 import Parse from '../../../h-react-library/common/Parse';
 
 import './SheinPoker.scss';
 
 const plans = [
-  {value: '1', label: ['顺序翻牌', '可用工具', '可交流', '可记错']},
-  {value: '2', label: ['半分翻牌', '可用工具', '可交流', '可记错']},
+  {value: '1', label: ['顺序翻牌', '可用工具', '可交流', '可能会记错']},
+  {value: '2', label: ['半分翻牌', '可用工具', '可交流', '可能会记错']},
   {value: '3', label: ['顺序翻牌', '可用工具', '可交流']},
   {value: '4', label: ['半分翻牌', '可用工具', '可交流']},
   {value: '5', label: ['顺序翻牌', '可交流']},
@@ -48,6 +48,7 @@ class SheinPoker extends Component {
             scan: 0, // 找牌时间
             turn: 0, // 翻牌时间
             contact: 0, // 交流时间
+            recall: 0, // 回忆时间
             total: 0, // 总时间
           },
         };
@@ -63,7 +64,6 @@ class SheinPoker extends Component {
   start = () => {
     this.debug = 0;
     this.state.currentPoker = Parse.shuffle(poker);
-    this.state.currentPoker = [16, 4, 6, 19, 23, 5, 2, 21, 20, 12, 25, 15, 0, 18, 10, 9, 8, 7, 11, 14, 22, 3, 1, 17, 13, 24];
     this.setState({
       currentPoker: this.state.currentPoker,
     });
@@ -102,7 +102,7 @@ class SheinPoker extends Component {
           let thisPokerValue = this.state.currentPoker[turni]; // 正确值
           pi === 1 && console.log(turni, thisPokerValue);
           /*
-          if (v.label.includes('可记错') && Math.random() < 0.05) {
+          if (v.label.includes('可能会记错') && Math.random() < 0.05) {
             data.error = data.error + 1;
             thisPokerValue = this.state.currentPoker[Parse.randInt(0, 25)];
           }
@@ -159,9 +159,29 @@ class SheinPoker extends Component {
               if (isBreak) break;
             }
           }
+          // 自己回忆
+          for (let ti = 0; ti < this.state.currentPoker.length; ti++) {
+            if (data.cache[pi] && data.cache[pi][ti] && data.cache[pi][ti] === this.state.currentPoker[ti] && this.state.currentPoker[ti] === data.target) {
+              data.found.push(data.target);
+              data.target = data.target + 1;
+              if (data.found.length === 26) {
+                data.finish = true;
+                this.state.finish = this.state.finish + 1;
+              }
+              data.second.recall = data.second.recall + 15;
+              break
+            }
+          }
           data.lap = data.lap + 1;
-          data.second.contact = Parse.decimal(data.second.contact,2);
-          data.second.total = Parse.decimal(data.second.scan + data.second.move + data.second.turn + data.second.contact, 2);
+          data.second.contact = Parse.decimal(data.second.contact, 2);
+          data.second.total = Parse.decimal(
+            data.second.scan
+            + data.second.move
+            + data.second.turn
+            + data.second.contact
+            + data.second.recall
+            , 2
+          );
         }
       });
       this.setState({
@@ -173,10 +193,10 @@ class SheinPoker extends Component {
     }
     setTimeout(() => {
       this.debug = this.debug + 1;
-      if (this.state.isPlaying && this.debug < 10) {
+      if (this.state.isPlaying /*&& this.debug < 10*/) {
         this.run();
       }
-    }, 0.25)
+    }, 0.75)
   };
 
   render() {
@@ -196,6 +216,7 @@ class SheinPoker extends Component {
                 <p>5、必须组内每人都参与</p>
                 <p>6、一次交流时间模拟为 2 秒，使用工具也算是一次交流</p>
                 <p>7、在允许记错牌的情况下，记错的概率为 5 %</p>
+                <p>8、每人从自己脑海中搜索记忆时间为 15 秒</p>
                 <p>* 由于为程序模拟，删除抢跑罚10秒，删除翻错牌罚3秒</p>
               </div>
             }
@@ -203,18 +224,26 @@ class SheinPoker extends Component {
           <Row gutter={4}>
             {
               plans.map((v) => {
+                const data = this.state.data[v.value];
                 return (
-                  <Col key={v.value} span={6} style={styles.block}>
+                  <Col key={v.value} span={4} style={styles.block}>
                     <Alert banner message={v.label} icon={false} type="warning"/>
                     <div>
-
+                      <Statistic title="游戏状态" value={this.state.isPlaying ? '正在游戏中...' : '不在游戏中'} />
+                      <Statistic title="完成状态" value={data && data.finish ? '已完成' : '未完成'} />
+                      {data && data.lap && <Statistic title="总跑轮数" value={data.lap + '轮'} />}
+                      {data && data.second && <Statistic title="总耗时" value={data.second.total + '秒'} />}
+                      {data && data.second && <Statistic title="跑步耗时" value={data.second.move + '秒'} />}
+                      {data && data.second && <Statistic title="翻牌耗时" value={data.second.turn + '秒'} />}
+                      {data && data.second && <Statistic title="交流耗时" value={data.second.contact + '秒'} />}
+                      {data && data.second && <Statistic title="回忆耗时" value={data.second.recall + '秒'} />}
                     </div>
                   </Col>
                 );
               })
             }
           </Row>
-          <div style={{textAlign: 'center'}}>
+          <div style={{textAlign: 'center', marginTop: 30}}>
             <Button
               type="primary"
               disabled={this.state.isPlaying}
@@ -249,9 +278,9 @@ const styles = {
     margin: '10px auto',
   },
   block: {
-    height: '500px',
-    border: '1px solid #f6ffed',
-    background: '#eeeeee',
+    height: '300px',
+    padding: 10,
+    border: '1px solid #bbbbbb',
     overflowY: 'auto',
   },
 };
