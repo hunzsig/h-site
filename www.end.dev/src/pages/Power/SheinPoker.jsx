@@ -237,13 +237,14 @@ class SheinPoker extends Component {
                       {data && data.second && <Statistic title="翻牌耗时" value={data.second.turn + '秒'} />}
                       {data && data.second && <Statistic title="交流耗时" value={data.second.contact + '秒'} />}
                       {data && data.second && <Statistic title="回忆耗时" value={data.second.recall + '秒'} />}
+                      {data && data.error && <Statistic title="记错次数" value={data.error + '次'} />}
                     </div>
                   </Col>
                 );
               })
             }
           </Row>
-          <div style={{textAlign: 'center', marginTop: 30}}>
+          <div style={{textAlign: 'center', marginTop: 20}}>
             <Button
               type="primary"
               disabled={this.state.isPlaying}
