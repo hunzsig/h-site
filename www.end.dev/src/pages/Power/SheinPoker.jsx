@@ -196,7 +196,7 @@ class SheinPoker extends Component {
       if (this.state.isPlaying /*&& this.debug < 10*/) {
         this.run();
       }
-    }, 0.75)
+    }, 1.00)
   };
 
   renderTable = () => {
