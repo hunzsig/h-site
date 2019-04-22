@@ -21,6 +21,12 @@ return array(
             'port' => '3306',
             'charset' => 'utf8mb4',
         ),
+        'sqlite' => array(
+            'type' => 'sqlite',
+            'dir' => __DIR__,
+            'name' => 'hunzsig.db',
+            'charset' => 'utf8',
+        ),
     ),
     'redis' => array(
         'project_name' => 'HZS_V_1',
@@ -40,6 +46,12 @@ return array(
                 'pwd' => '123456',
                 'port' => '3306',
                 'charset' => 'utf8mb4',
+            ),
+            'sqlite' => array(
+                'type' => 'sqlite',
+                'dir' => __DIR__,
+                'name' => 'hunzsig.db',
+                'charset' => 'utf8',
             ),
         ),
         'package_key' => 'Zc7VNh23yusFxus0',

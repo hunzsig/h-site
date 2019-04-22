@@ -13,6 +13,7 @@ class AbstractModel extends \Common\Model\AbstractModel{
             'System.Map.getKV',
             'System.Auth.createEmailAuthCode',
             'System.Auth.createMobileAuthCode',
+            'System.Data.sqlite',
         ));
     }
 
