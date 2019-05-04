@@ -65,6 +65,13 @@ const routerConfig = [
     ],
   },
   {
+    path: '/netSource',
+    name: '赋能网址',
+    icon: <Icon type="global" />,
+    layout: Layout,
+    component: () => import('./pages/Home/NetSource'),
+  },
+  {
     path: '/project',
     name: '项目 · 经验',
     icon: <Icon type="appstore" theme="filled" />,

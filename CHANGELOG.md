@@ -1,4 +1,6 @@
 ## 更新日志 <a href="https://gitlab.com/h-web/h-site" target="_blank">Gitlab</a>
+### 2019/05/05
+    增加了友爱网址
 ### 2019/03/25
     增加了一个运算锻炼器
 ### 2019/03/24
