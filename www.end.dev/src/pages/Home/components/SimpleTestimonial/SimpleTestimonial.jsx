@@ -20,19 +20,19 @@ export default class SimpleTestimonial extends Component {
             本站作者单身无女友，一心一意做技术。
             php工程师，js工程师，贯通前后端，项目经验丰富。
             <br />
-            React、Vue、JQuery、Bootstrap、SemanticUI、light7、icedesign、antv、antd、rsuiteJs
+            React、Vue、JQuery、Bootstrap、SemanticUI、light7、icedesign、Antv、Antd、RsuiteJs
             <br />
             nginx、apache、supervisord、shadowsocks、svn、git、centOS、Ubuntu
             <br />
             Zendframe2、ThinkPHP、workerman、swoole、nodeJs、wordpress
             <br />
-            Mysql、postgreSQL、TimescaleDB、mssql、sqlite、redis
+            Mysql、postgreSQL、TimescaleDB、mssql、sqlite、mongo、redis
             <br />
-            coco-creator、unity3D
+            coco-creator、unity3D、gitbook
             <br />
-            Rust、erlang、goland
+            Rust、erlang、golang
             <br />
-            lua、jass2、vJass
+            lua、vJass、jass2
           </p>
           <div style={styles.infoBox}>
             <img
