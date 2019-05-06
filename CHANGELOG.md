@@ -1,4 +1,4 @@
-## 更新日志 <a href="https://gitlab.com/h-web/h-site" target="_blank">Gitlab</a>
+## 更新日志
 ### 2019/05/06
     删除了react-markdown-reader
     修正了部分首页内容
