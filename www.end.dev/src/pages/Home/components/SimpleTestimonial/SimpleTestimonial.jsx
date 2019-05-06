@@ -37,7 +37,7 @@ export default class SimpleTestimonial extends Component {
           <div style={styles.infoBox}>
             <img
               style={styles.avatar}
-              src={require('./images/logo.128.png')}
+              src={require('./images/logo.128.jpg')}
               alt="图像"
             />
             <h5 style={styles.name}>魂之似光站点</h5>
@@ -70,6 +70,7 @@ const styles = {
   avatar: {
     width: '64px',
     height: '64px',
+    borderRadius: '50%',
   },
   name: {
     margin: '0 15px',
