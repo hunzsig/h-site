@@ -1,7 +1,5 @@
 import React, {Component} from 'react';
 import {Tabs} from 'antd';
-import { Markdown } from 'react-markdown-reader';
-import 'react-markdown-reader/less/highlight.less'
 
 import './md.scss'
 
@@ -9,43 +7,43 @@ import './md.scss'
 const logData = [
   {
     name: '本站日志',
-    log: (<Markdown>{require("./md/h-site.md")}</Markdown>)
+    log: require("./md/h-site.md"),
   },
   {
     name: 'h-php',
-    log: (<Markdown>{require("./md/h-php.md")}</Markdown>)
+    log: require("./md/h-php.md"),
   },
   {
     name: 'h-ice-cli',
-    log: (<Markdown>{require("./md/h-ice-cli.md")}</Markdown>),
+    log: require("./md/h-ice-cli.md"),
   },
   {
     name: 'h-react-library',
-    log: (<Markdown>{require("./md/h-react-library.md")}</Markdown>),
+    log: require("./md/h-react-library.md"),
   },
   {
     name: 'h-lua',
-    log: (<Markdown>{require("./md/h-lua.md")}</Markdown>),
+    log: require("./md/h-lua.md"),
   },
   {
     name: 'h-vjass',
-    log: (<Markdown>{require("./md/h-vjass.md")}</Markdown>),
+    log: require("./md/h-vjass.md"),
   },
   {
     name: '时空之轮TD',
-    log: (<Markdown>{require("./md/w3x.hyperSpaceTD.md")}</Markdown>),
+    log: require("./md/w3x.hyperSpaceTD.md"),
   },
   {
     name: '剑圣求生之路',
-    log: (<Markdown>{require("./md/w3x.jsqszl.md")}</Markdown>),
+    log: require("./md/w3x.jsqszl.md"),
   },
   {
     name: '殛魁之战',
-    log: (<Markdown>{require("./md/w3x.bosskiller.md")}</Markdown>),
+    log: require("./md/w3x.bosskiller.md"),
   },
   {
     name: '谋掠',
-    log: (<Markdown>{require("./md/w3x.plunderOrDead.md")}</Markdown>),
+    log: require("./md/w3x.plunderOrDead.md"),
   },
 ];
 
@@ -65,9 +63,7 @@ export default class UpdateLog extends Component {
             logData.map((v) => {
               return (
                 <Tabs.TabPane tab={v.name} key={v.name}>
-                  <div style={{ maxHeight: '900px', overflow: 'auto' }}>
-                    {v.log}
-                  </div>
+                  <div style={{ maxHeight: '900px', overflow: 'auto' }} dangerouslySetInnerHTML={{__html: v.log}} />
                 </Tabs.TabPane>
               );
             })

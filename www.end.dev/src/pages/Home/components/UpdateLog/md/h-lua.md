@@ -1,4 +1,4 @@
-## 更新日志 <a href="https://gitlab.com/h-w3x/h-lua" target="_blank">Gitlab</a>
+## 更新日志 <a href="https://github.com/hunzsig/h-lua" target="_blank">Github</a>
 
 ### 2019/03
     制作新的属性系统

@@ -1,4 +1,4 @@
-## 更新日志 <a href="https://gitlab.com/h-w3x/h-war3/tree/master/w3xMaps/bosskiller" target="_blank">Gitlab</a>
+## 更新日志 <a href="https://github.com/hunzsig/h-war3/tree/master/w3xMaps/bosskiller" target="_blank">下载地图包</a>
 ### v2.0.2
     【系统】平衡性调整
     【系统】选择英雄时间延长到60秒

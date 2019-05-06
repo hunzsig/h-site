@@ -1,4 +1,4 @@
-## 更新日志 <a href="https://gitlab.com/h-web/h-php" target="_blank">Gitlab</a>
+## 更新日志 <a href="https://github.com/hunzsig/h-php" target="_blank">Github</a>
 ### 2019/04/03
     修复了DB核心的break产生的warning
 ### 2019/03/30

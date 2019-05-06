@@ -1,4 +1,6 @@
-[![npm version](https://img.shields.io/npm/v/h-ice-cli.svg)](https://www.npmjs.com/package/h-ice-cli)
+[![NPM version](https://img.shields.io/npm/v/h-ice-cli.svg)](https://www.npmjs.com/package/h-ice-cli)
+[![NPM downloads](http://img.shields.io/npm/dm/h-ice-cli.svg?style=flat-square)](http://npmjs.com/h-ice-cli)
+
 ## h-ice-cli
 
 ### please run:
@@ -10,6 +12,8 @@
     ice app
 
 ### 更新日志
+### 1.3.9
+    delete package:react-markdown-reader
 ### 1.3.5 ~ 1.3.8
     more stable
 ### 1.3.4

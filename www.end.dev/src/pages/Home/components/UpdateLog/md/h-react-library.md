@@ -1,4 +1,5 @@
-## 更新日志 <a href="https://gitlab.com/h-web/h-react-library" target="_blank">Gitlab</a>
+## 更新日志 <a href="https://github.com/hunzsig/h-react-library" target="_blank">Github</a>
+
 ### 2019/04/12
     新增 Parse 函数数组洗牌 shuffle
 ### 2019/03/25

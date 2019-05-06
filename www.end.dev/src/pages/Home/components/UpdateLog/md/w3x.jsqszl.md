@@ -1,4 +1,4 @@
-## 更新日志 <a href="https://gitlab.com/h-w3x/h-war3/tree/master/w3xMaps/jsqszl" target="_blank">Gitlab</a>
+## 更新日志 <a href="https://github.com/hunzsig/h-war3/tree/master/w3xMaps/jsqszl" target="_blank">下载地图包</a>
 ### v2.21
     -夏季地皮
     -修复白虎灼热之箭错误说明的问题

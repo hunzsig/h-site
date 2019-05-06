@@ -6,5 +6,5 @@ npm i
 
 #### clone h-react-library 到根目录
 ```
-git clone git@gitlab.com:h-web/h-react-library.git
+git clone git@github.com:hunzsig/h-site.git
 ```

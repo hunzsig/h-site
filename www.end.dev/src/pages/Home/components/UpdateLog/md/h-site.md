@@ -1,4 +1,9 @@
-## 更新日志 <a href="https://gitlab.com/h-web/h-site" target="_blank">Gitlab</a>
+## 更新日志 <a href="https://github.com/hunzsig/h-site" target="_blank">Github</a>
+
+### 2019/05/06
+    删除了react-markdown-reader
+    修正了部分首页内容
+    替换了LOGO图标
 ### 2019/05/05
     增加了友爱网址
 ### 2019/04/12

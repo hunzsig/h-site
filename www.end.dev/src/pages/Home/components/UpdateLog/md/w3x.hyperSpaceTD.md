@@ -1,4 +1,4 @@
-## 更新日志 <a href="https://gitlab.com/h-w3x/h-war3/tree/master/w3xMaps/hyperSpaceTD" target="_blank">Gitlab</a>
+## 更新日志 <a href="https://github.com/hunzsig/h-war3/tree/master/w3xMaps/hyperSpaceTD" target="_blank">下载地图包</a>
 ### v1.1.9
     [系统]优化了开局的卡顿
     [设定]时空之轮位置更改，同时增加了几个新的轮组，轮组提供光环帮助，小时轮被毁敌军会增强
