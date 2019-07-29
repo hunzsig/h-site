@@ -24,7 +24,7 @@ export default class SimpleTestimonial extends Component {
             <br />
             nginx、apache、supervisord、shadowsocks、svn、git、centOS、Ubuntu
             <br />
-            Zendframe2、ThinkPHP、workerman、swoole、nodeJs、wordpress
+            Laravel、Zendframe2、ThinkPHP、workerman、swoole、nodeJs、wordpress
             <br />
             Mysql、postgreSQL、TimescaleDB、mssql、sqlite、mongo、redis
             <br />
